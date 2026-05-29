@@ -1,0 +1,130 @@
+---
+import '../styles/global.css'
+
+interface Props {
+  title: string
+  description?: string
+  ogImage?: string
+  ogType?: 'website' | 'article'
+  pubDate?: Date
+  canonicalURL?: string
+}
+
+const {
+  title,
+  description = 'Gear reviews, production guides, and deep cuts for hip hop producers, audio engineers, and neo soul heads.',
+  ogImage = '/og.png',
+  ogType = 'website',
+  pubDate,
+  canonicalURL = Astro.url.href,
+} = Astro.props
+
+const fullTitle = title === 'Crate Theory' ? title : `${title} | Crate Theory`
+
+const NAV = [
+  { href: '/blog',      label: 'Blog'      },
+  { href: '/downloads', label: 'Downloads' },
+  { href: '/store',     label: 'Store'     },
+  { href: '/about',     label: 'About'     },
+]
+---
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{fullTitle}</title>
+  <meta name="description" content={description} />
+  <link rel="canonical" href={canonicalURL} />
+  <link rel="sitemap" href="/sitemap.xml" />
+  <link rel="icon" type="image/png" href="/favicon.png" />
+
+  <meta property="og:title"       content={fullTitle} />
+  <meta property="og:description" content={description} />
+  <meta property="og:image"       content={ogImage} />
+  <meta property="og:type"        content={ogType} />
+  <meta property="og:url"         content={canonicalURL} />
+  <meta property="og:site_name"   content="Crate Theory" />
+  {ogType === 'article' && pubDate && (
+    <meta property="article:published_time" content={pubDate.toISOString()} />
+  )}
+
+  <meta name="twitter:card"        content="summary_large_image" />
+  <meta name="twitter:site"        content="@cratetheory" />
+  <meta name="twitter:title"       content={fullTitle} />
+  <meta name="twitter:description" content={description} />
+  <meta name="twitter:image"       content={ogImage} />
+</head>
+
+<body>
+  <!-- Nav -->
+  <header class="sticky top-0 z-50 border-b border-border bg-bg/90 backdrop-blur-md">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 flex items-center justify-between h-14">
+
+      <a href="/" class="flex items-center gap-2.5 group">
+        <div class="w-6 h-6 rounded-full border border-cream/30 flex items-center justify-center group-hover:border-cream/60 transition-colors">
+          <div class="w-2 h-2 rounded-full bg-cream/60 group-hover:bg-cream transition-colors"></div>
+        </div>
+        <span class="font-black tracking-tight text-cream text-sm uppercase">Crate Theory</span>
+      </a>
+
+      <nav class="flex items-center gap-1 text-sm">
+        {NAV.map(({ href, label }) => (
+          <a
+            href={href}
+            class="px-3 py-1.5 rounded text-muted hover:text-cream transition-colors hover:bg-surface"
+          >
+            {label}
+          </a>
+        ))}
+      </nav>
+
+    </div>
+  </header>
+
+  <main class="flex-1">
+    <slot />
+  </main>
+
+  <!-- Footer -->
+  <footer class="border-t border-border mt-24">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 py-12">
+      <div class="flex flex-col sm:flex-row justify-between gap-8">
+
+        <div>
+          <p class="font-black text-cream tracking-tight uppercase text-sm">Crate Theory</p>
+          <p class="text-muted text-sm mt-1">Dig deeper.</p>
+          <p class="text-muted/60 text-xs mt-3">
+            <a href="https://x.com/cratetheory" class="hover:text-cream transition-colors">@cratetheory</a>
+          </p>
+        </div>
+
+        <div class="grid grid-cols-2 gap-x-12 gap-y-2 text-sm text-muted">
+          <a href="/hip_hop_production" class="hover:text-cream transition-colors">Hip Hop Production</a>
+          <a href="/pro_audio"          class="hover:text-cream transition-colors">Pro Audio</a>
+          <a href="/neo_soul"           class="hover:text-cream transition-colors">Neo Soul</a>
+          <a href="/home_studio"        class="hover:text-cream transition-colors">Home Studio</a>
+          <a href="/dj_gear"            class="hover:text-cream transition-colors">DJ Gear</a>
+          <a href="/vinyl_collecting"   class="hover:text-cream transition-colors">Vinyl</a>
+          <a href="/music_software"     class="hover:text-cream transition-colors">Music Software</a>
+          <a href="/music_theory"       class="hover:text-cream transition-colors">Music Theory</a>
+        </div>
+
+        <div class="flex flex-col gap-2 text-sm text-muted">
+          <a href="/downloads"           class="hover:text-cream transition-colors">Downloads</a>
+          <a href="/store"               class="hover:text-cream transition-colors">Store</a>
+          <a href="/about"               class="hover:text-cream transition-colors">About</a>
+          <a href="/affiliate-disclosure" class="hover:text-cream transition-colors">Affiliate Disclosure</a>
+          <a href="/privacy-policy"      class="hover:text-cream transition-colors">Privacy Policy</a>
+        </div>
+
+      </div>
+
+      <div class="mt-10 pt-6 border-t border-border text-xs text-muted/50 flex flex-col sm:flex-row justify-between gap-2">
+        <span>&copy; {new Date().getFullYear()} Crate Theory. Some links are affiliate links.</span>
+        <span>Built for the culture.</span>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

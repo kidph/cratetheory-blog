@@ -1,0 +1,81 @@
+---
+import BaseLayout from './BaseLayout.astro'
+
+interface Props {
+  title: string
+  description: string
+  pubDate: Date
+  category: string
+  heroImage?: string
+  featured?: boolean
+}
+
+const { title, description, pubDate, category, heroImage, featured } = Astro.props
+
+const NICHE_LABELS: Record<string, string> = {
+  hip_hop_production: 'Hip Hop Production',
+  pro_audio:          'Pro Audio',
+  neo_soul:           'Neo Soul',
+  home_studio:        'Home Studio',
+  dj_gear:            'DJ Gear',
+  vinyl_collecting:   'Vinyl',
+  music_software:     'Music Software',
+  music_theory:       'Music Theory',
+}
+
+const label = NICHE_LABELS[category] ?? category
+const dateStr = pubDate.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  ogImage={heroImage}
+  ogType="article"
+  pubDate={pubDate}
+>
+  <article class="max-w-3xl mx-auto px-4 sm:px-6 py-12">
+
+    <!-- Back link -->
+    <a href={`/${category}`} class="inline-flex items-center gap-1.5 text-sm text-muted hover:text-cream transition-colors mb-8">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="15 18 9 12 15 6"/>
+      </svg>
+      {label}
+    </a>
+
+    <!-- Hero image -->
+    {heroImage && (
+      <div class="aspect-video overflow-hidden rounded-lg mb-8 border border-border">
+        <img
+          src={heroImage}
+          alt={title}
+          class="w-full h-full object-cover opacity-80"
+        />
+      </div>
+    )}
+
+    <!-- Header -->
+    <header class="mb-10">
+      <div class="flex items-center gap-3 mb-4">
+        <a href={`/${category}`} class="ct-badge hover:border-cream/40 hover:text-cream/80 transition-colors">{label}</a>
+        {featured && <span class="ct-badge border-cream/30 text-cream/50">Featured</span>}
+        <span class="text-xs text-muted ml-auto">{dateStr}</span>
+      </div>
+      <h1 class="text-3xl sm:text-4xl font-black text-cream tracking-tight leading-tight mb-4">{title}</h1>
+      <p class="text-muted text-lg leading-relaxed">{description}</p>
+    </header>
+
+    <!-- Article content -->
+    <div class="prose prose-ct max-w-none">
+      <slot />
+    </div>
+
+    <!-- Footer nav -->
+    <div class="mt-16 pt-8 border-t border-border flex items-center justify-between">
+      <a href="/blog" class="text-sm text-muted hover:text-cream transition-colors">&larr; All articles</a>
+      <a href={`/${category}`} class="text-sm text-muted hover:text-cream transition-colors">{label} &rsaquo;</a>
+    </div>
+
+  </article>
+</BaseLayout>

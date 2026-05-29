@@ -1,0 +1,70 @@
+---
+interface Props {
+  title: string
+  description: string
+  category: string
+  tags: string[]
+  price: string
+  downloadUrl: string
+  featured?: boolean
+  fileInfo?: string
+}
+
+const { title, description, category, tags, price, downloadUrl, featured, fileInfo } = Astro.props
+
+const isFree = price === 'free' || price === '0' || price === '$0'
+
+const CAT_COLORS: Record<string, string> = {
+  'Sample Pack':  'border-cream/20 text-cream/60',
+  'VST Plugin':   'border-cream/20 text-cream/60',
+  'Preset Pack':  'border-cream/20 text-cream/60',
+  'MIDI Kit':     'border-cream/20 text-cream/60',
+  'Drum Kit':     'border-cream/20 text-cream/60',
+  'Loop Pack':    'border-cream/20 text-cream/60',
+}
+const catClass = CAT_COLORS[category] ?? 'border-border text-muted'
+---
+
+<div class="ct-card flex flex-col gap-4 p-5 group">
+  <div class="flex items-start justify-between gap-3">
+    <div class="flex flex-col gap-1.5 flex-1">
+      <div class="flex items-center gap-2 flex-wrap">
+        <span class={`ct-badge ${catClass}`}>{category}</span>
+        {featured && <span class="ct-badge border-cream/30 text-cream/50">Featured</span>}
+      </div>
+      <h3 class="font-bold text-cream text-base leading-snug">{title}</h3>
+    </div>
+    <div class="shrink-0 text-right">
+      {isFree
+        ? <span class="text-sm font-semibold text-cream/80">Free</span>
+        : <span class="text-sm font-semibold text-cream">{price}</span>
+      }
+    </div>
+  </div>
+
+  <p class="text-muted text-sm leading-relaxed">{description}</p>
+
+  {fileInfo && (
+    <p class="text-xs text-muted/50 font-mono">{fileInfo}</p>
+  )}
+
+  {tags.length > 0 && (
+    <div class="flex flex-wrap gap-1.5">
+      {tags.map(t => (
+        <span class="text-xs px-2 py-0.5 rounded bg-surface border border-border text-muted/70">{t}</span>
+      ))}
+    </div>
+  )}
+
+  <a
+    href={downloadUrl}
+    target="_blank"
+    rel="noopener noreferrer"
+    class={isFree ? 'ct-btn-primary mt-auto self-start' : 'ct-btn mt-auto self-start'}
+  >
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/>
+    </svg>
+    {isFree ? 'Free Download' : `Get for ${price}`}
+  </a>
+</div>

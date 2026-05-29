@@ -1,0 +1,77 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro'
+import DownloadCard from '../../components/DownloadCard.astro'
+import downloads from '../../data/downloads.json'
+
+const categories = ['All', ...Array.from(new Set(downloads.map(d => d.category)))]
+---
+
+<BaseLayout title="Free Downloads" description="Free sample packs, MIDI kits, presets, and loops for hip hop producers and audio engineers. No email required.">
+
+  <div class="max-w-5xl mx-auto px-4 sm:px-6 py-12">
+
+    <div class="mb-10">
+      <h1 class="text-3xl font-black text-cream uppercase tracking-tight mb-2">Downloads</h1>
+      <p class="text-muted text-base">Sample packs, MIDI kits, presets, and loops — no email required.</p>
+    </div>
+
+    <!-- Category filter (client-side) -->
+    <div class="flex items-center gap-2 flex-wrap mb-8" id="filter-bar">
+      {categories.map((cat, i) => (
+        <button
+          data-cat={cat}
+          class={`ct-badge transition-colors cursor-pointer ${i === 0 ? 'border-cream/40 text-cream/80 active' : 'hover:border-cream/40 hover:text-cream/80'}`}
+        >
+          {cat}
+        </button>
+      ))}
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4" id="downloads-grid">
+      {downloads.map(d => (
+        <div data-category={d.category} class="download-item">
+          <DownloadCard
+            title={d.title}
+            description={d.description}
+            category={d.category}
+            tags={d.tags}
+            price={d.price}
+            downloadUrl={d.downloadUrl}
+            featured={d.featured}
+            fileInfo={d.fileInfo}
+          />
+        </div>
+      ))}
+    </div>
+
+    <p class="text-muted/50 text-xs mt-10 text-center">
+      More packs dropping regularly. Free downloads are yours to keep — use in any commercial project.
+    </p>
+
+  </div>
+
+</BaseLayout>
+
+<script>
+  const filterBar = document.getElementById('filter-bar')
+  const items = document.querySelectorAll<HTMLElement>('.download-item')
+  let active = 'All'
+
+  filterBar?.addEventListener('click', (e) => {
+    const btn = (e.target as HTMLElement).closest('[data-cat]') as HTMLElement | null
+    if (!btn) return
+    active = btn.dataset.cat ?? 'All'
+
+    filterBar.querySelectorAll('[data-cat]').forEach(b => {
+      b.classList.remove('border-cream/40', 'text-cream/80', 'active')
+      b.classList.add('hover:border-cream/40', 'hover:text-cream/80')
+    })
+    btn.classList.add('border-cream/40', 'text-cream/80', 'active')
+    btn.classList.remove('hover:border-cream/40', 'hover:text-cream/80')
+
+    items.forEach(item => {
+      const show = active === 'All' || item.dataset.category === active
+      item.style.display = show ? '' : 'none'
+    })
+  })
+</script>

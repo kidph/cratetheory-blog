@@ -1,0 +1,46 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro'
+const year = new Date().getFullYear()
+---
+
+<BaseLayout title="Privacy Policy" description="Crate Theory privacy policy.">
+
+  <div class="max-w-3xl mx-auto px-4 sm:px-6 py-12">
+
+    <h1 class="text-3xl font-black text-cream uppercase tracking-tight mb-8">Privacy Policy</h1>
+
+    <div class="prose prose-ct max-w-none">
+
+      <p class="text-muted/60 text-sm">Last updated: {year}</p>
+
+      <h2>Information We Collect</h2>
+      <p>
+        Crate Theory does not require account registration or collect personal information to browse the site
+        or access free downloads. We may collect standard web server logs (IP addresses, browser type, referring URLs)
+        for security and analytics purposes.
+      </p>
+
+      <h2>Third-Party Services</h2>
+      <p>This site may use the following third-party services that have their own privacy policies:</p>
+      <ul>
+        <li><strong>Vercel</strong> — site hosting and analytics</li>
+        <li><strong>Printify</strong> — merchandise store processing</li>
+        <li><strong>Amazon / CJ Affiliates</strong> — affiliate tracking cookies</li>
+      </ul>
+
+      <h2>Cookies</h2>
+      <p>
+        We do not set first-party cookies. Affiliate links may set third-party tracking cookies governed by
+        the respective affiliate program's privacy policy.
+      </p>
+
+      <h2>Contact</h2>
+      <p>
+        Questions about this policy? Reach us at <a href="https://x.com/cratetheory">@cratetheory</a> on X.
+      </p>
+
+    </div>
+
+  </div>
+
+</BaseLayout>

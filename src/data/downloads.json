@@ -1,0 +1,68 @@
+[
+  {
+    "id": "ct-boom-bap-kit-01",
+    "title": "Crate Theory Boom Bap Kit Vol. 1",
+    "description": "24 hand-selected drum samples chopped from vinyl — kicks, snares, hats, and percs with that dusty, compressed sound. 44.1kHz / 24-bit WAV.",
+    "category": "Drum Kit",
+    "tags": ["boom bap", "hip hop", "drums", "vinyl", "wav"],
+    "price": "free",
+    "downloadUrl": "#",
+    "fileInfo": "24 samples / WAV 44.1kHz 24-bit / 18 MB",
+    "featured": true
+  },
+  {
+    "id": "ct-neo-soul-chords-01",
+    "title": "Neo Soul Chord Progressions MIDI Pack",
+    "description": "40 MIDI chord progressions in the style of D'Angelo, Erykah Badu, and Musiq Soulchild. Extended voicings, jazzy substitutions, minor 7ths — drop them into any DAW.",
+    "category": "MIDI Kit",
+    "tags": ["neo soul", "chords", "midi", "jazz", "r&b"],
+    "price": "free",
+    "downloadUrl": "#",
+    "fileInfo": "40 MIDI files / compatible with all DAWs",
+    "featured": true
+  },
+  {
+    "id": "ct-sp404-textures-01",
+    "title": "SP-404 Style Texture Pack",
+    "description": "Vinyl crackle, tape hiss, room noise, and lo-fi atmosphere samples designed for layering under beats. Inspired by classic MPC and SP-404 production techniques.",
+    "category": "Sample Pack",
+    "tags": ["lo-fi", "texture", "vinyl", "sp404", "atmosphere"],
+    "price": "free",
+    "downloadUrl": "#",
+    "fileInfo": "32 samples / WAV / 22 MB",
+    "featured": false
+  },
+  {
+    "id": "ct-lo-fi-drums-01",
+    "title": "Lo-Fi Drum Loops Vol. 1",
+    "description": "20 original lo-fi drum loops at various BPMs (70–95). Processed through tape emulation and vinyl saturation. Royalty-free, use in any commercial project.",
+    "category": "Loop Pack",
+    "tags": ["lo-fi", "drums", "loops", "royalty-free"],
+    "price": "free",
+    "downloadUrl": "#",
+    "fileInfo": "20 loops / 70–95 BPM / WAV / 28 MB",
+    "featured": false
+  },
+  {
+    "id": "ct-analog-presets-01",
+    "title": "Analog Warmth — Serum Preset Pack",
+    "description": "50 Serum presets covering warm pads, analog-style bass, Rhodes-inspired keys, and neo soul lead sounds. Built for modern R&B and lo-fi hip hop production.",
+    "category": "Preset Pack",
+    "tags": ["serum", "presets", "analog", "neo soul", "bass", "pads"],
+    "price": "$9.99",
+    "downloadUrl": "#",
+    "fileInfo": "50 presets / requires Serum 1.3+",
+    "featured": true
+  },
+  {
+    "id": "ct-boom-bap-kit-02",
+    "title": "Crate Theory Boom Bap Kit Vol. 2",
+    "description": "36 more samples — this time focusing on breaks, chops, and one-shots with heavier compression and mid-range punch. Perfect for East Coast and underground hip hop.",
+    "category": "Drum Kit",
+    "tags": ["boom bap", "breaks", "hip hop", "drums", "wav"],
+    "price": "$4.99",
+    "downloadUrl": "#",
+    "fileInfo": "36 samples / WAV 44.1kHz 24-bit / 31 MB",
+    "featured": false
+  }
+]
