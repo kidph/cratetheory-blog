@@ -5,14 +5,14 @@ import ArticleCard from '../../components/ArticleCard.astro'
 
 export async function getStaticPaths() {
   const NICHES = [
-    { slug: 'hip_hop_production', label: 'Hip Hop Production' },
-    { slug: 'pro_audio',          label: 'Pro Audio'          },
-    { slug: 'neo_soul',           label: 'Neo Soul'           },
-    { slug: 'home_studio',        label: 'Home Studio'        },
-    { slug: 'dj_gear',            label: 'DJ Gear'            },
-    { slug: 'vinyl_collecting',   label: 'Vinyl'              },
-    { slug: 'music_software',     label: 'Music Software'     },
-    { slug: 'music_theory',       label: 'Music Theory'       },
+    { slug: 'hip_hop_production', label: 'Hip Hop Production', hero: '/images/heroes/hero-hip_hop_production.jpg' },
+    { slug: 'pro_audio',          label: 'Pro Audio',          hero: '/images/heroes/hero-pro_audio.jpg'          },
+    { slug: 'neo_soul',           label: 'Neo Soul',           hero: '/images/heroes/hero-neo_soul.jpg'           },
+    { slug: 'home_studio',        label: 'Home Studio',        hero: '/images/heroes/hero-home_studio.jpg'        },
+    { slug: 'dj_gear',            label: 'DJ Gear',            hero: '/images/heroes/hero-dj_gear.jpg'            },
+    { slug: 'vinyl_collecting',   label: 'Vinyl',              hero: '/images/heroes/hero-vinyl_collecting.jpg'   },
+    { slug: 'music_software',     label: 'Music Software',     hero: '/images/heroes/hero-music_software.jpg'     },
+    { slug: 'music_theory',       label: 'Music Theory',       hero: '/images/heroes/hero-music_theory.jpg'       },
   ]
 
   const allArticles = await getCollection('articles')
@@ -21,6 +21,7 @@ export async function getStaticPaths() {
     params: { niche: niche.slug },
     props: {
       label: niche.label,
+      hero:  niche.hero,
       articles: allArticles
         .filter(a => a.data.category === niche.slug)
         .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()),
@@ -29,7 +30,7 @@ export async function getStaticPaths() {
 }
 
 const { niche } = Astro.params
-const { label, articles } = Astro.props
+const { label, hero, articles } = Astro.props
 
 const NICHES = [
   { slug: 'hip_hop_production', label: 'Hip Hop Production' },
@@ -45,10 +46,21 @@ const NICHES = [
 
 <BaseLayout title={label} description={`${label} articles — gear reviews, guides, and deep cuts from Crate Theory.`}>
 
-  <div class="max-w-5xl mx-auto px-4 sm:px-6 py-12">
+  <!-- Niche hero -->
+  <section class="relative border-b border-border overflow-hidden">
+    <div
+      class="absolute inset-0 bg-cover bg-center bg-no-repeat"
+      style={`background-image: url('${hero}')`}
+    ></div>
+    <div class="absolute inset-0 bg-gradient-to-r from-bg via-bg/75 to-transparent"></div>
+    <div class="relative max-w-5xl mx-auto px-4 sm:px-6 py-16 sm:py-20">
+      <h1 class="text-4xl sm:text-5xl font-black text-cream uppercase tracking-tight">{label}</h1>
+    </div>
+  </section>
 
-    <div class="mb-10">
-      <h1 class="text-3xl font-black text-cream uppercase tracking-tight mb-4">{label}</h1>
+  <div class="max-w-5xl mx-auto px-4 sm:px-6 py-10">
+
+    <div class="mb-8">
       <div class="flex items-center gap-2 flex-wrap">
         <a href="/blog" class="ct-badge hover:border-cream/40 hover:text-cream/80 transition-colors">All</a>
         {NICHES.map(n => (
