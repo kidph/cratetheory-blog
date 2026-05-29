@@ -1,27 +1,79 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro'
+
+const STORE_URL = 'https://crate-theory.printify.me'
+
+const products = [
+  {
+    name: 'Unisex T-Shirt',
+    description: 'Soft Bella+Canvas tee. Built for the studio and the streets.',
+    price: '$29.99',
+    image: 'https://images-api.printify.com/mockup/6a19d4134525ffd5730f0611/156064/118466/crate-theory-unisex-t-shirt.jpg?camera_label=front-side',
+  },
+  {
+    name: 'Hoodie',
+    description: 'Heavy blend fleece. Kangaroo pocket. Built for late-night sessions.',
+    price: '$49.99',
+    image: 'https://images-api.printify.com/mockup/6a19d417db4273d2500cfe01/39874/16190/crate-theory-hoodie.jpg?camera_label=front',
+  },
+  {
+    name: 'Sticker',
+    description: 'Waterproof kiss-cut sticker. Lives on your MPC, laptop, or flight case.',
+    price: '$4.99',
+    image: 'https://images-api.printify.com/mockup/6a19d41aa0b34026ee0a0e79/45750/16655/crate-theory-sticker.jpg?camera_label=front',
+  },
+]
 ---
 
-<BaseLayout title="Store" description="Crate Theory merch — tees, hoodies, and accessories for producers and audio heads.">
+<BaseLayout title="Store" description="Crate Theory merch — tees, hoodies, and stickers for producers and audio heads.">
 
   <div class="max-w-5xl mx-auto px-4 sm:px-6 py-12">
 
     <div class="mb-10">
-      <h1 class="text-3xl font-black text-cream uppercase tracking-tight mb-2">Crate Theory Merch</h1>
-      <p class="text-muted text-base">Gear for the culture. Tees, hoodies, and accessories for producers and audio heads.</p>
+      <h1 class="text-3xl font-black text-cream uppercase tracking-tight mb-1">Rep the Crate</h1>
+      <p class="text-muted text-base">For late nights and loud monitors.</p>
     </div>
 
-    <!--
-      PRINTIFY POPUP STORE EMBED
-      Replace the placeholder below with your Printify popup store embed code.
-      In Printify: My stores → your store → Popup store → Get embed code
-      Paste the <script> tag here.
-    -->
-    <div id="printify-store-embed" class="min-h-[600px] flex items-center justify-center border border-dashed border-border rounded-lg">
-      <div class="text-center">
-        <p class="text-muted text-sm mb-2">Printify popup store embed goes here.</p>
-        <p class="text-muted/50 text-xs">Update <code class="font-mono">src/pages/store/index.astro</code> with your embed code from Printify.</p>
-      </div>
+    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-10">
+      {products.map(p => (
+        <a
+          href={STORE_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="ct-card group flex flex-col"
+        >
+          <div class="aspect-square overflow-hidden bg-surface">
+            <img
+              src={p.image}
+              alt={p.name}
+              class="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity"
+              loading="lazy"
+            />
+          </div>
+          <div class="p-4 flex flex-col gap-2 flex-1">
+            <div class="flex items-center justify-between">
+              <h3 class="font-bold text-cream text-sm">{p.name}</h3>
+              <span class="text-sm text-cream/80 font-semibold">{p.price}</span>
+            </div>
+            <p class="text-muted text-xs leading-relaxed flex-1">{p.description}</p>
+            <span class="text-xs text-muted/60 group-hover:text-cream/50 transition-colors mt-1">
+              Shop now &rsaquo;
+            </span>
+          </div>
+        </a>
+      ))}
+    </div>
+
+    <div class="text-center">
+      <a
+        href={STORE_URL}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="ct-btn-primary"
+      >
+        Visit the Full Store
+      </a>
+      <p class="text-muted/50 text-xs mt-4">Fulfilled by Printify. Ships worldwide.</p>
     </div>
 
   </div>
